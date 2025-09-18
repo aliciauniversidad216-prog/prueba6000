@@ -14,22 +14,15 @@
         text-align: center;
         color: white;
         text-shadow: 2px 2px 4px black;
-      }
-      button {
-        margin: 10px;
-        padding: 10px 20px;
-        font-size: 16px;
+        background: rgba(0,0,0,0.4);
+        padding: 5px 10px;
         border-radius: 8px;
-        border: none;
-        cursor: pointer;
       }
     </style>
   </head>
   <body>
     <div id="ui">
-      <h2>🔎 Busca los símbolos de los clanes para que aparezca el personaje</h2>
-      <button id="startBtn">Iniciar escaneo</button>
-      <button id="stopBtn">Detener escaneo</button>
+      <h2>🔎 Busca los targets de los personajes</h2>
     </div>
 
     <a-scene 
@@ -40,7 +33,7 @@
       device-orientation-permission-ui="enabled: false">
 
       <a-assets>
-        <!-- MODELOS (directo en la raíz del repo) -->
+        <!-- MODELOS en la raíz -->
         <a-asset-item id="narutoModel" src="naruto.glb"></a-asset-item>
         <a-asset-item id="madaraModel" src="madara.glb"></a-asset-item>
         <a-asset-item id="konohaModel" src="konoha.glb"></a-asset-item>
@@ -64,20 +57,5 @@
         <a-gltf-model src="#madaraModel" position="0 -0.25 0" scale="0.05 0.05 0.05" animation-mixer></a-gltf-model>
       </a-entity>
     </a-scene>
-
-    <script>
-      const sceneEl = document.querySelector("a-scene");
-      const startBtn = document.getElementById("startBtn");
-      const stopBtn = document.getElementById("stopBtn");
-
-      startBtn.addEventListener("click", () => {
-        sceneEl.systems["mindar-image"].start(); 
-      });
-
-      stopBtn.addEventListener("click", () => {
-        sceneEl.systems["mindar-image"].stop(); 
-      });
-    </script>
   </body>
 </html>
-
