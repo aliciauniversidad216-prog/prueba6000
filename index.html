@@ -22,7 +22,7 @@
   </head>
   <body>
     <div id="ui">
-      <h2> 🔎 Busca los targets de los personajes 🔎 </h2>
+      <h2>🔎 Busca los targets de los personajes</h2>
     </div>
 
     <a-scene 
@@ -41,38 +41,40 @@
 
       <a-camera position="0 0 0" look-controls="enabled: false"></a-camera>
 
-    <!-- NARUTO (targetIndex 0) -->
+      <!-- NARUTO (targetIndex 0) -->
       <a-entity mindar-image-target="targetIndex: 0">
-        <!-- Contenedor del fondo -->
+        <!-- Contenedor del fondo Konoha -->
         <a-entity position="0 -1 -3" scale="0.02 0.02 0.02">
           <a-gltf-model src="#konohaModel"></a-gltf-model>
-      </a-entity>
-  <!-- Contenedor de personajes -->
-      <a-entity position="0 -0.25 0" scale="0.1 0.1 0.1">
-        <a-gltf-model src="#narutoModel" animation-mixer></a-gltf-model>
+        </a-entity>
+        <!-- Contenedor de Naruto -->
+        <a-entity position="0 0 0" scale="0.1 0.1 0.1">
+          <a-gltf-model src="#narutoModel" animation-mixer></a-gltf-model>
         </a-entity>
       </a-entity>
 
-<!-- MADARA (targetIndex 1) -->
+      <!-- MADARA (targetIndex 1) -->
       <a-entity mindar-image-target="targetIndex: 1">
+        <!-- Contenedor del fondo Konoha -->
         <a-entity position="0 -1 -3" scale="0.02 0.02 0.02">
           <a-gltf-model src="#konohaModel"></a-gltf-model>
         </a-entity>
-     <a-entity position="0 -0.25 0" scale="0.1 0.1 0.1">
-        <a-gltf-model src="#madaraModel" animation-mixer></a-gltf-model>
-     </a-entity>
-    </a-entity>
-
+        <!-- Contenedor de Madara -->
+        <a-entity position="0 0 0" scale="0.1 0.1 0.1">
+          <a-gltf-model src="#madaraModel" animation-mixer></a-gltf-model>
+        </a-entity>
+      </a-entity>
 
     </a-scene>
 
     <script>
       const ui = document.getElementById("ui");
 
-      // cuando se detecta un target, ocultamos el mensaje
+      // Ocultar el mensaje cuando se detecta cualquier target
       document.addEventListener("targetFound", () => {
         ui.style.display = "none";
       });
     </script>
   </body>
 </html>
+
