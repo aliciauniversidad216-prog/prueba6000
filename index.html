@@ -1,0 +1,81 @@
+<html>
+  <head>
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <script src="https://aframe.io/releases/1.5.0/aframe.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/gh/donmccurdy/aframe-extras@v7.0.0/dist/aframe-extras.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/mind-ar@1.2.5/dist/mindar-image-aframe.prod.js"></script>
+    <style>
+      body { margin: 0; overflow: hidden; font-family: sans-serif; }
+      #ui {
+        position: absolute;
+        top: 10px;
+        left: 50%;
+        transform: translateX(-50%);
+        text-align: center;
+        color: white;
+        text-shadow: 2px 2px 4px black;
+      }
+      button {
+        margin: 10px;
+        padding: 10px 20px;
+        font-size: 16px;
+        border-radius: 8px;
+        border: none;
+        cursor: pointer;
+      }
+    </style>
+  </head>
+  <body>
+    <div id="ui">
+      <h2>Busca los símbolos de los clanes para que aparezca el personaje</h2>
+      <button id="startBtn">Iniciar escaneo</button>
+      <button id="stopBtn">Detener escaneo</button>
+    </div>
+
+    <a-scene 
+      mindar-image="imageTargetSrc: ./targets.mind; maxTrack: 2" 
+      color-space="sRGB" 
+      renderer="colorManagement: true, physicallyCorrectLights" 
+      vr-mode-ui="enabled: false" 
+      device-orientation-permission-ui="enabled: false">
+
+      <a-assets>
+        <!-- MODELOS (directo en la raíz) -->
+        <a-asset-item id="narutoModel" src="naruto.glb"></a-asset-item>
+        <a-asset-item id="madaraModel" src="madara.glb"></a-asset-item>
+        <a-asset-item id="konohaModel" src="konoha.glb"></a-asset-item>
+      </a-assets>
+
+      <a-camera position="0 0 0" look-controls="enabled: false"></a-camera>
+
+      <!-- ESCENARIO DE KONOHA -->
+      <a-entity gltf-model="#konohaModel" position="0 -1 -3" scale="0.5 0.5 0.5"></a-entity>
+
+      <!-- NARUTO (targetIndex 0) -->
+      <a-entity mindar-image-target="targetIndex: 0">
+        <a-gltf-model rotation="0 0 0" position="0 -0.25 0" scale="0.05 0.05 0.05" src="#narutoModel" animation-mixer>
+        </a-gltf-model>
+      </a-entity>
+
+      <!-- MADARA (targetIndex 1) -->
+      <a-entity mindar-image-target="targetIndex: 1">
+        <a-gltf-model rotation="0 0 0" position="0 -0.25 0" scale="0.05 0.05 0.05" src="#madaraModel" animation-mixer>
+        </a-gltf-model>
+      </a-entity>
+    </a-scene>
+
+    <script>
+      const sceneEl = document.querySelector("a-scene");
+      const startBtn = document.getElementById("startBtn");
+      const stopBtn = document.getElementById("stopBtn");
+
+      startBtn.addEventListener("click", () => {
+        sceneEl.systems["mindar-image"].start(); 
+      });
+
+      stopBtn.addEventListener("click", () => {
+        sceneEl.systems["mindar-image"].stop(); 
+      });
+    </script>
+  </body>
+</html>
